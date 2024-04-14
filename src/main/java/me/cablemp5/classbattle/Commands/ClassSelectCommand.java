@@ -78,7 +78,7 @@ public class ClassSelectCommand implements TabExecutor {
     classOptions.setItem(3, endAssassinIcon);
 
     //bounty hunter
-    ItemStack bountyHunterIcon = ItemBuilderUtil.generateItemWithMeta()
+//    ItemStack bountyHunterIcon = ItemBuilderUtil.generateItemWithMeta()
     ItemStack bounticon = new ItemStack(Material.CROSSBOW, 1);
     ItemMeta bountmeta = bounticon.getItemMeta();
     bountmeta.setLore(new ArrayList<>(
