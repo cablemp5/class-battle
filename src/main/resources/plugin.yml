@@ -1,0 +1,17 @@
+name: ClassBattle
+version: '${project.version}'
+main: me.cablemp5.classbattle.ClassBattle
+api-version: 1.19
+authors: [ cablemp5, mnul_ ]
+description: A minigame where different classes fight it out!
+commands:
+  select:
+    description: Choose a class
+    usage: /select
+    aliases:
+      - sel
+  arena:
+    description: Make an arena
+    usage: /arena
+    aliases:
+      - ar
