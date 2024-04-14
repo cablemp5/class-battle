@@ -95,6 +95,9 @@ public class ClassSelectCommand implements TabExecutor {
         + "MIMIC - Use the effect of the mob you last killed (Only from the spawn eggs you get)"),null,null,0);
     classOptions.setItem(7, poacherIcon);
 
+    //frost
+    ItemStack frostIcon = ItemBuilderUtil.generateItemWithMeta(ChatColor.AQUA + "Frost",Material.ICE,1,Arrays.asList("freezes everyone except the user for 5 seconds"),null,null,0);
+    classOptions.setItem(8,frostIcon);
     player.openInventory(classOptions);
   }
 //
