@@ -37,6 +37,7 @@ public final class ClassBattle extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
+        //gitghub test
 
         this.classSelectCommand = new ClassSelectCommand(this);
         this.arenaCommand = new ArenaCommand(this);
