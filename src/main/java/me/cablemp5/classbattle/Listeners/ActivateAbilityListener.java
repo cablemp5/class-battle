@@ -67,6 +67,8 @@ public class ActivateAbilityListener implements Listener {
 
     private final int poacherCooldown = 100;
 
+    private final int frostCooldown = 200;
+    ArrayList<Player> frostPlayersOnCooldown = new ArrayList<>();
 
     @EventHandler
     public void onClick(PlayerInteractEvent event) {
@@ -999,6 +1001,68 @@ public class ActivateAbilityListener implements Listener {
                     break;
 
                 }
+                case "frost": {
+
+                    if (!frostPlayersOnCooldown.contains(player)) {
+
+                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "" + ChatColor.BOLD + "BLESS " + ChatColor.WHITE + "◇ ◇ ◇ ◇ ◇ ◇ ◇ ◇ ◇ ◇ "));
+
+                        World world = player.getWorld();
+                        Location loc = player.getLocation();
+
+                        for(Player p : Bukkit.getOnlinePlayers()){
+                            if(p != player){
+                                p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,100,999));
+
+                            }
+                        }
+                        frostPlayersOnCooldown.add(player);
+
+
+                        new BukkitRunnable() {
+
+                            @Override
+                            public void run() {
+                                frostPlayersOnCooldown.remove(player);
+                                if (ClassManager.CLASS_MAP.get(player).equals("frost"))
+                                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.AQUA + "" + ChatColor.BOLD + "FREEZE " + ChatColor.AQUA + "◆ ◆ ◆ ◆ ◆ ◆ ◆ ◆ ◆ ◆ "));
+                                player.getWorld().playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 0);
+
+
+                            }
+                        }.runTaskLater(classBattle, frostCooldown);
+
+                        new BukkitRunnable() {
+
+                            float timeLeft = botCooldown;
+
+                            @Override
+                            public void run() {
+
+                                timeLeft -= 2;
+
+                                if (timeLeft <= 0 || !ClassManager.CLASS_MAP.get(player).equals("botanist")) {
+                                    this.cancel();
+                                }
+
+                                int percent = 10 - (Math.round((timeLeft / botCooldown) * 10));
+
+                                String bar = "◇ ◇ ◇ ◇ ◇ ◇ ◇ ◇ ◇ ◇";
+
+                                for (int i = 0; i < percent; i++) {
+                                    bar = "◆ " + bar;
+                                }
+
+                                bar = bar.substring(0, 19);
+
+                                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "" + ChatColor.BOLD + "BLESS " + ChatColor.RESET + bar));
+
+                            }
+                        }.runTaskTimer(classBattle, 0L, 2L);
+                    }
+                    break;
+
+                }
             }
 
 
@@ -1024,10 +1088,92 @@ public class ActivateAbilityListener implements Listener {
                     }
                     break;
                 }
+                case "botanist": {
+
+                    if (!botPlayersOnCooldown.contains(player)) {
+
+                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "" + ChatColor.BOLD + "BLESS " + ChatColor.WHITE + "◇ ◇ ◇ ◇ ◇ ◇ ◇ ◇ ◇ ◇ "));
+
+                        World world = player.getWorld();
+                        Location loc = player.getLocation();
+
+                        Location cac1 = new Location(world, loc.getX() + 1, loc.getY() - 1, loc.getZ() - 2);
+                        Location cac2 = new Location(world, loc.getX() + 1, loc.getY() - 1, loc.getZ() + 2);
+                        Location cac3 = new Location(world, loc.getX() - 2, loc.getY() - 1, loc.getZ());
+                        Location cac4 = new Location(world, loc.getX() - 1, loc.getY() - 1, loc.getZ() + 2);
+                        Location cac5 = new Location(world, loc.getX() - 1, loc.getY() - 1, loc.getZ() - 2);
+                        Location cac6 = new Location(world, loc.getX() + 2, loc.getY() - 1, loc.getZ());
+
+                        ArrayList<Location> locs = new ArrayList<>(Arrays.asList(cac1, cac2, cac3, cac4, cac5, cac6));
+
+                        for (Location l : locs) {
+
+                            l.getBlock().setType(Material.SAND);
+                            l.add(0, 1, 0).getBlock().setType(Material.CACTUS);
+                            l.add(0, 1, 0).getBlock().setType(Material.CACTUS);
+
+
+                            player.spawnParticle(Particle.FALLING_SPORE_BLOSSOM, l.add(0, 1, 0), 100, 0.5, 0, 0.5, 1);
+
+
+                        }
+
+
+                        player.spawnParticle(Particle.COMPOSTER, player.getLocation().add(0, 1, 0), 100, 0.5, 0.5, 0.5);
+
+
+                        botPlayersOnCooldown.add(player);
+
+
+                        new BukkitRunnable() {
+
+                            @Override
+                            public void run() {
+                                botPlayersOnCooldown.remove(player);
+                                if (ClassManager.CLASS_MAP.get(player).equals("botanist"))
+                                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "" + ChatColor.BOLD + "BLESS " + ChatColor.AQUA + "◆ ◆ ◆ ◆ ◆ ◆ ◆ ◆ ◆ ◆ "));
+                                player.getWorld().playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 0);
+
+
+                            }
+                        }.runTaskLater(classBattle, botCooldown);
+
+                        new BukkitRunnable() {
+
+                            float timeLeft = botCooldown;
+
+                            @Override
+                            public void run() {
+
+                                timeLeft -= 2;
+
+                                if (timeLeft <= 0 || !ClassManager.CLASS_MAP.get(player).equals("botanist")) {
+                                    this.cancel();
+                                }
+
+                                int percent = 10 - (Math.round((timeLeft / botCooldown) * 10));
+
+                                String bar = "◇ ◇ ◇ ◇ ◇ ◇ ◇ ◇ ◇ ◇";
+
+                                for (int i = 0; i < percent; i++) {
+                                    bar = "◆ " + bar;
+                                }
+
+                                bar = bar.substring(0, 19);
+
+                                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN + "" + ChatColor.BOLD + "BLESS " + ChatColor.RESET + bar));
+
+                            }
+                        }.runTaskTimer(classBattle, 0L, 2L);
+                    }
+                    break;
+
+                }
             }
 
 
         }
+
 
 
     }
