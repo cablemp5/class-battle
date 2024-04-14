@@ -263,6 +263,13 @@ public class BlockListener implements Listener {
 
 
          }
+         else if (ClassManager.CLASS_MAP.containsValue("frost") && event.getBlock().getType() == Material.BLUE_ICE){
+             Location lock = event.getBlock().getLocation();
+             lock.equals(lock.clone().add(0,1,0));
+             lock.getBlock().setType(Material.BLUE_ICE);
+             lock.equals(lock.clone().add(0,1,0));
+             lock.getBlock().setType(Material.BLUE_ICE);
+         }
 
     }
 }

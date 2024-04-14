@@ -409,7 +409,22 @@ public class ClassSelectListener implements Listener {
 
 
 
+
                         break;
+
+                    }
+                    case ICE:{
+                        ClassManager.CLASS_MAP.put(p,"frost");
+                        p.getInventory().addItem(ItemBuilderUtil.generateItemWithMeta("frost man weapon", Material.WOODEN_SWORD ,1,null,null,null,0));
+                        p.getInventory().addItem(ItemBuilderUtil.generateItemWithMeta(null, Material.COOKED_SALMON ,10,null,null,null,0));
+                        p.getInventory().addItem(ItemBuilderUtil.generateItemWithMeta("Mei wall", Material.BLUE_ICE ,2,null,null,null,0));
+                        p.getInventory().setHelmet(new ItemStack(Material.LEATHER_HELMET,1));
+                        p.getInventory().setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE,1));
+                        p.getInventory().setLeggings(new ItemStack(Material.LEATHER_LEGGINGS,1));
+                        p.getInventory().setBoots(ItemBuilderUtil.generateItemWithMeta(null,Material.LEATHER_BOOTS,1,null,null,Enchantment.FROST_WALKER,2));
+
+
+
 
                     }
 
