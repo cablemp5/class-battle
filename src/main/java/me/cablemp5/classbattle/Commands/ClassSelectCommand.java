@@ -67,59 +67,35 @@ public class ClassSelectCommand implements TabExecutor {
     classOptions.setItem(1, reaperIcon);
 
     //fire walker
-    ItemStack fireWalkerIcon = ItemBuilderUtil.generateItemWithMeta(ChatColor.GOLD + "" + ChatColor.BOLD + "Fire Walker",Material.BLAZE_ROD,1,Arrays.asList(ChatColor.GRAY + "Magma - Creates a puddle of magma",
+    ItemStack fireWalkerIcon = ItemBuilderUtil.generateItemWithMeta(ChatColor.GOLD + "" + ChatColor.BOLD + "Fire ",Material.BLAZE_ROD,1,Arrays.asList(ChatColor.GRAY + "Magma - Creates a puddle of magma",
         ChatColor.GRAY + "Flame - Creates a trail of fire"),null,null,0);
     classOptions.setItem(2, fireWalkerIcon);
 
-    //end assassin
-    ItemStack endAssassinIcon = ItemBuilderUtil.generateItemWithMeta(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "End Assassin",Material.ENDER_PEARL,1,Arrays.asList(
+    //assassin
+    ItemStack assassinIcon = ItemBuilderUtil.generateItemWithMeta(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Assassin",Material.ENDER_PEARL,1,Arrays.asList(
         ChatColor.GRAY + "Assasinate - Teleport to the nearest enemy and inflict them with",
         ChatColor.GRAY + "blindness and slowness whilst becoming invisible"),null,null,0);
-    classOptions.setItem(3, endAssassinIcon);
+    classOptions.setItem(3, assassinIcon);
 
     //bounty hunter
-//    ItemStack bountyHunterIcon = ItemBuilderUtil.generateItemWithMeta()
-    ItemStack bounticon = new ItemStack(Material.CROSSBOW, 1);
-    ItemMeta bountmeta = bounticon.getItemMeta();
-    bountmeta.setLore(new ArrayList<>(
-        Arrays.asList(ChatColor.GRAY + "Spray - The crossbow becomes rapidfire for 5 seconds")));
-
-    bountmeta.setDisplayName(
-        ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "Bounty Hunter \uD83C\uDFF9");
-    bounticon.setItemMeta(bountmeta);
-    classOptions.setItem(4, bounticon);
+    ItemStack bountyHunterIcon = ItemBuilderUtil.generateItemWithMeta(ChatColor.DARK_GREEN + "" + ChatColor.BOLD + "Bounty Hunter",Material.CROSSBOW,1,Arrays.asList(ChatColor.GRAY + "Spray - The crossbow becomes rapidfire for 5 seconds"),ItemFlag.HIDE_ATTRIBUTES,null,0);
+    classOptions.setItem(4, bountyHunterIcon);
 
     //botanist
-    ItemStack boticon = new ItemStack(Material.JUNGLE_SAPLING, 1);
-    ItemMeta botmeta = boticon.getItemMeta();
-    botmeta.setLore(new ArrayList<>(Arrays.asList(ChatColor.GRAY
-        + "Bless - Blesses the ground to grow plants that inflict damage and effects")));
-
-    botmeta.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "Sacred Botanist ☀");
-    boticon.setItemMeta(botmeta);
-    classOptions.setItem(5, boticon);
+    ItemStack botanistIcon = ItemBuilderUtil.generateItemWithMeta(ChatColor.GREEN + "" + ChatColor.BOLD + "Botanist",Material.JUNGLE_SAPLING, 1, Arrays.asList(ChatColor.GRAY
+        + "Bless - Blesses the ground to grow plants that inflict damage and effects"),null,null,0);
+    classOptions.setItem(5, botanistIcon);
 
     //scholar
-    ItemStack scholaricon = new ItemStack(Material.ENCHANTED_BOOK, 1);
-    ItemMeta scholarmeta = scholaricon.getItemMeta();
-    scholarmeta.setLore(new ArrayList<>(
-        Arrays.asList(ChatColor.GRAY + "Scroll - Use a scroll to have a random effect")));
-
-    scholarmeta.setDisplayName(ChatColor.BLUE + "" + ChatColor.BOLD + "Forbidden Scholar Ξ");
-    scholaricon.setItemMeta(scholarmeta);
-    classOptions.setItem(6, scholaricon);
+    ItemStack scholarIcon = ItemBuilderUtil.generateItemWithMeta(ChatColor.BLUE + "" + ChatColor.BOLD + "Scholar",Material.ENCHANTED_BOOK,1,Arrays.asList(ChatColor.GRAY + "Scroll - Use a scroll to have a random effect"),null,null,0);
+    classOptions.setItem(6, scholarIcon);
 
     //hunter
-    ItemStack huntericon = new ItemStack(Material.SKELETON_SKULL, 1);
-    ItemMeta huntermeta = huntericon.getItemMeta();
-    huntermeta.setLore(new ArrayList<>(Arrays.asList(ChatColor.GRAY
-        + "MIMIC - Use the effect of the mob you last killed (Only from the spawn eggs you get)")));
-
-    huntermeta.setDisplayName(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Unworthy Poacher ⚐");
-    huntericon.setItemMeta(huntermeta);
-    classOptions.setItem(7, huntericon);
+    ItemStack poacherIcon = ItemBuilderUtil.generateItemWithMeta(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Poacher",Material.SKELETON_SKULL,1,Arrays.asList(ChatColor.GRAY
+        + "MIMIC - Use the effect of the mob you last killed (Only from the spawn eggs you get)"),null,null,0);
+    classOptions.setItem(7, poacherIcon);
 
     player.openInventory(classOptions);
   }
-
+//
 }

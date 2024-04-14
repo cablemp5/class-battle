@@ -36,10 +36,14 @@ public class ArenaCommand implements TabExecutor {
 
     HashMap<Player,BossBar> bosses = new HashMap<>();
 
+    public boolean getIsArena() {
+        return isArena;
+    }
+//
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (sender instanceof Player) {
 
+        if (sender instanceof Player) {
 
             Player player = (Player) sender;
 
@@ -73,9 +77,6 @@ public class ArenaCommand implements TabExecutor {
 
                 }
 
-
-
-
                 for (Player o: Bukkit.getOnlinePlayers()) {
                     BossBar bossBar = Bukkit.createBossBar(ChatColor.BOLD + "Proximity", BarColor.GREEN, BarStyle.SOLID);
                     bossBar.addPlayer(o);
@@ -87,8 +88,6 @@ public class ArenaCommand implements TabExecutor {
                 isArena = true;
 
                 new BukkitRunnable() {
-
-
 
                     @Override
                     public void run() {
@@ -109,8 +108,6 @@ public class ArenaCommand implements TabExecutor {
 
                             ArrayList<Player> others = new ArrayList<>(Bukkit.getOnlinePlayers());
                             others.remove(p);
-
-
 
                             Player nearest = others.get(0);
 
@@ -149,12 +146,10 @@ public class ArenaCommand implements TabExecutor {
                     }
                 }.runTaskTimer(classBattle,0L,2L);
 
-
             } else {
 
                 World world = Bukkit.getServer().getWorlds().get(0);
                 world.getWorldBorder().setSize(99999999);
-
 
                 isArena = false;
 
